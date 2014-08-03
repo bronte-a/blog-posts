@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+      }
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script>
+var map;
+var Auckland = new google.maps.LatLng(-36.848189, 174.760069);
+
+var MY_MAPTYPE_ID = 'custom_style';
+
+function initialize() {
+
+  var featureOpts = [
+  {
+    "featureType": "landscape",
+    "stylers": [
+      { "color": "#b7f38a" }
+    ]
+  },{
+    "featureType": "road.highway",
+    "stylers": [
+      { "color": "#e9ece4" }
+    ]
+  },{
+    "featureType": "water",
+    "stylers": [
+      { "color": "#c9e3ed" }
+    ]
+  },{
+    "featureType": "transit.line",
+    "stylers": [
+      { "color": "#c1d0df" }
+    ]
+  },{
+    "featureType": "road.local",
+    "stylers": [
+      { "color": "#e9eaec" }
+    ]
+  },{
+    "featureType": "road.arterial",
+    "stylers": [
+      { "color": "#efeded" }
+    ]
+  },{
+  },{
+    "elementType": "labels.text.stroke",
+    "stylers": [
+      { "visibility": "off" }
+    ]
+  },{
+    "elementType": "labels.text.fill",
+    "stylers": [
+      { "color": "#8a9e70" }
+    ]
+  },{
+    "featureType": "transit.station",
+    "stylers": [
+      { "color": "#bbd097" }
+    ]
+  },{
+    "featureType": "poi",
+    "stylers": [
+      { "color": "#ccd9a4" }
+    ]
+  },{
+  },{
+  },{
+  }
+];
+
+
+  var mapOptions = {
+    zoom: 15,
+    center: Auckland,
+    mapTypeControlOptions: {
+      mapTypeIds: [google.maps.MapTypeId.ROADMAP, MY_MAPTYPE_ID]
+    },
+    mapTypeId: MY_MAPTYPE_ID
+  };
+
+  map = new google.maps.Map(document.getElementById('map-canvas'),
+      mapOptions);
+
+  var styledMapOptions = {
+    name: 'Our Map'
+  };
+
+  var customMapType = new google.maps.StyledMapType(featureOpts, styledMapOptions);
+
+  map.mapTypes.set(MY_MAPTYPE_ID, customMapType);
+
+    var marker = new google.maps.Marker({
+      position: Auckland,
+      map: map,
+      title: 'Hello World!'
+  });
+}
+
+
+
+google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+  </head>
+  <body>
+    <div id="map-canvas"></div>
+  </body>
+</html>
